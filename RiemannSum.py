@@ -24,6 +24,20 @@ class Polynomial():
         for i in range(sliceAmount):
             totalSum += sliceValue * self.findValue(startPoint + sliceValue * (i+1))
         return totalSum
+    
+    def leftRiemannSum(self, startPoint, endPoint, sliceAmount):
+        sliceValue = (endPoint - startPoint)/sliceAmount
+        totalSum = 0
+        for i in range(sliceAmount):
+            totalSum += sliceValue * self.findValue(startPoint + sliceValue * (i))
+        return totalSum
+    
+    def midRiemannSum(self, startPoint, endPoint, sliceAmount):
+        sliceValue = (endPoint - startPoint)/sliceAmount
+        totalSum = 0
+        for i in range(sliceAmount):
+            totalSum += sliceValue * self.findValue(startPoint + sliceValue * (i+0.5))
+        return totalSum
 
 
 
@@ -31,8 +45,9 @@ def main():
     coefficientArray = list(map(int, input("Enter Coefficients each seperated by a space. First number is the x^0th coefficient and so on. > ").split()))
     polynomialObject = Polynomial(coefficientArray)
     polynomialObject.printPolynomial()
-    print(polynomialObject.findValue(2))
     print(polynomialObject.rightRiemannSum(2,4,6))
+    print(polynomialObject.leftRiemannSum(2,4,6))
+    print(polynomialObject.midRiemannSum(2,4,6))
     
 
 
