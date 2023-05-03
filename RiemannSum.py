@@ -32,7 +32,7 @@ def main():
     polynomialObject = Polynomial(coefficientArray)
     polynomialObject.printPolynomial()
     print(polynomialObject.findValue(2))
-    print(polynomialObject.rightRiemannSum(2,4,2))
+    print(polynomialObject.rightRiemannSum(2,4,6))
     
 
 
