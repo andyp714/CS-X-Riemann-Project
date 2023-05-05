@@ -45,6 +45,7 @@ def main():
     coefficientArray = list(map(int, input("Enter Coefficients each seperated by a space. First number is the x^0th coefficient and so on. > ").split()))
     polynomialObject = Polynomial(coefficientArray)
     polynomialObject.printPolynomial()
+    startInterval = int(input("Enter Start Interval > "))
     print(polynomialObject.rightRiemannSum(2,4,6))
     print(polynomialObject.leftRiemannSum(2,4,6))
     print(polynomialObject.midRiemannSum(2,4,6))
