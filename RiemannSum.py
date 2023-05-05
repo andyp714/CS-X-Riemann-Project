@@ -1,7 +1,12 @@
+import numpy as np
+import matplotlib.pyplot as plt
+
+
 class Polynomial():
     def __init__(self, coefficientArray):
         self.coefficientValues = coefficientArray
         self.degree = len(coefficientArray) - 1
+    
 
     def findValue(self,value):
         tempValue = 0
@@ -74,6 +79,7 @@ def main():
     print("Left Riemann Sum:",polynomialObject.leftRiemannSum(startInterval,endInterval,sliceAmount))
     print("Midpoint Riemann Sum:",polynomialObject.midRiemannSum(startInterval,endInterval,sliceAmount))
     print("Trapezoidal Riemann Sum:",polynomialObject.trapRiemannSum(startInterval,endInterval,sliceAmount))
+    polynomialObject.graphEquation(startInterval,endInterval)
 
         
     
