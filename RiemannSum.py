@@ -11,11 +11,26 @@ class Polynomial():
 
 
     def printPolynomial(self):
-        polynomialString = 'f(x) = ' + str(self.coefficientValues[0])
+        if self.coefficientValues[0] != 0:
+            polynomialString = 'f(x) = ' + str(self.coefficientValues[0])
+            firstDigit = False
+
+        else:
+            polynomialString = 'f(x) = '
+            firstDigit = True
         for index, coefficient in enumerate(self.coefficientValues[1:]):
             if coefficient != 0:
-                tempString = str(coefficient) + 'x^' + str(index+1)
-                polynomialString = polynomialString + ' + ' + tempString
+                if index == 0:
+                    tempString = str(abs(coefficient)) + 'x' 
+                else:
+                    tempString = str(abs(coefficient)) + 'x^' + str(index+1)
+                if coefficient > 0:
+                    if firstDigit:
+                        polynomialString = polynomialString + tempString
+                    else:
+                        polynomialString = polynomialString + ' + ' + tempString
+                else:
+                    polynomialString = polynomialString + ' - ' + tempString
         print(polynomialString)
 
     def rightRiemannSum(self, startPoint, endPoint, sliceAmount):
@@ -42,13 +57,16 @@ class Polynomial():
 
 
 def main():
-    coefficientArray = list(map(int, input("Enter Coefficients each seperated by a space. First number is the x^0th coefficient and so on. > ").split()))
+    coefficientArray = list(map(float, input("Enter Coefficients each seperated by a space. First number is the x^0th coefficient and so on. > ").split()))
     polynomialObject = Polynomial(coefficientArray)
     polynomialObject.printPolynomial()
     startInterval = int(input("Enter Start Interval > "))
-    print(polynomialObject.rightRiemannSum(2,4,6))
-    print(polynomialObject.leftRiemannSum(2,4,6))
-    print(polynomialObject.midRiemannSum(2,4,6))
+    endInterval = int(input("Enter End Interval > "))
+    sliceAmount = int(input("Enter Slice Value > "))
+    print("Right Riemann Sum:", polynomialObject.rightRiemannSum(startInterval,endInterval,sliceAmount))
+    print("Left Riemann Sum:",polynomialObject.leftRiemannSum(startInterval,endInterval,sliceAmount))
+    print("Midpoint Riemann Sum:",polynomialObject.midRiemannSum(startInterval,endInterval,sliceAmount))
+        
     
 
 
