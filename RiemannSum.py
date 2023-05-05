@@ -53,6 +53,13 @@ class Polynomial():
         for i in range(sliceAmount):
             totalSum += sliceValue * self.findValue(startPoint + sliceValue * (i+0.5))
         return totalSum
+    
+    def trapRiemannSum(self, startPoint, endPoint, sliceAmount):
+        sliceValue = (endPoint - startPoint)/sliceAmount
+        totalSum = 0
+        for i in range(sliceAmount):
+            totalSum += sliceValue * (self.findValue(startPoint + sliceValue * (i+1)) + self.findValue(startPoint + sliceValue * (i)))/2
+        return totalSum
 
 
 
@@ -66,6 +73,8 @@ def main():
     print("Right Riemann Sum:", polynomialObject.rightRiemannSum(startInterval,endInterval,sliceAmount))
     print("Left Riemann Sum:",polynomialObject.leftRiemannSum(startInterval,endInterval,sliceAmount))
     print("Midpoint Riemann Sum:",polynomialObject.midRiemannSum(startInterval,endInterval,sliceAmount))
+    print("Trapezoidal Riemann Sum:",polynomialObject.trapRiemannSum(startInterval,endInterval,sliceAmount))
+
         
     
 
