@@ -1,5 +1,6 @@
 import numpy as np
 import matplotlib.pyplot as plt
+from matplotlib.patches import Rectangle
 
 
 class Polynomial():
@@ -66,3 +67,16 @@ class Polynomial():
         for i in range(sliceAmount):
             totalSum += sliceValue * (self.findValue(startPoint + sliceValue * (i+1)) + self.findValue(startPoint + sliceValue * (i)))/2
         return totalSum
+    
+    def graphRiemann(self, startPoint, endPoint, sliceAmount):
+        fig, axes = plt.subplots(2,2)
+        x = np.linspace(endPoint,startPoint, 100)
+        axes[0,0].plot(x, self.findValue(x))
+        sliceValue = (endPoint - startPoint)/sliceAmount
+
+        #Left Riemann Sum Graph
+        axes[0,0].set_title("Left Riemann Sum = " + str(round(self.leftRiemannSum(startPoint, endPoint, sliceAmount),4)))
+        for i in range(sliceAmount):
+            axes[0,0].add_patch(Rectangle((startPoint + sliceValue * i,0), sliceValue, self.findValue(startPoint + sliceValue * i), fc='none',ec='k'))
+        plt.show()
+        
