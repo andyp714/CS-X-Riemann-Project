@@ -104,7 +104,7 @@ class Polynomial():
             axes[1,1].plot(startPoint + sliceValue * (i+1), self.findValue(startPoint + sliceValue * (i+1)), 'co')
             xCords = [(startPoint + sliceValue * i), (startPoint + sliceValue * (i+1)), (startPoint + sliceValue * (i+1)), (startPoint + sliceValue * i)]
             yCords = [0, 0, self.findValue((startPoint + sliceValue * (i+1))), self.findValue((startPoint + sliceValue * i))]
-            axes[1,1].add_patch(Polygon(xy=list(zip(xCords, yCords)), ec='k', fc='none'))
+            axes[1,1].add_patch(Polygon(xy=list(zip(xCords, yCords)), ec=(0,1,1,0.6), fc=(0,1,1,0.2)))
 
         plt.show()
         
