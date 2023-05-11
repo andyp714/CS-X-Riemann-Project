@@ -1,6 +1,7 @@
 import numpy as np
 import matplotlib.pyplot as plt
 from matplotlib.patches import Rectangle
+from matplotlib.patches import Polygon
 
 
 class Polynomial():
@@ -70,13 +71,35 @@ class Polynomial():
     
     def graphRiemann(self, startPoint, endPoint, sliceAmount):
         fig, axes = plt.subplots(2,2)
+        fig.tight_layout()
         x = np.linspace(endPoint,startPoint, 100)
         axes[0,0].plot(x, self.findValue(x))
+        axes[0,1].plot(x, self.findValue(x))
+        axes[1,0].plot(x, self.findValue(x))
+        axes[1,1].plot(x, self.findValue(x))
         sliceValue = (endPoint - startPoint)/sliceAmount
 
         #Left Riemann Sum Graph
         axes[0,0].set_title("Left Riemann Sum = " + str(round(self.leftRiemannSum(startPoint, endPoint, sliceAmount),4)))
         for i in range(sliceAmount):
             axes[0,0].add_patch(Rectangle((startPoint + sliceValue * i,0), sliceValue, self.findValue(startPoint + sliceValue * i), fc='none',ec='k'))
+
+        #Right Riemann Sum Graph
+        axes[0,1].set_title("Right Riemann Sum = " + str(round(self.rightRiemannSum(startPoint, endPoint, sliceAmount),4)))
+        for i in range(sliceAmount):
+            axes[0,1].add_patch(Rectangle((startPoint + sliceValue * i,0), sliceValue, self.findValue(startPoint + sliceValue * (i+1)), fc='none',ec='k'))
+        
+        #Mid Riemann Sum Graph
+        axes[1,0].set_title("Midpoint Riemann Sum = " + str(round(self.midRiemannSum(startPoint, endPoint, sliceAmount),4)))
+        for i in range(sliceAmount):
+            axes[1,0].add_patch(Rectangle((startPoint + sliceValue * i,0), sliceValue, self.findValue(startPoint + sliceValue * (i+0.5)), fc='none',ec='k'))
+        
+        #Trap Riemann Sum Graph
+        axes[1,1].set_title("Trapezoid Riemann Sum = " + str(round(self.trapRiemannSum(startPoint, endPoint, sliceAmount),4)))
+        for i in range(sliceAmount):
+            xCords = [(startPoint + sliceValue * i), (startPoint + sliceValue * (i+1)), (startPoint + sliceValue * (i+1)), (startPoint + sliceValue * i)]
+            yCords = [0, 0, self.findValue((startPoint + sliceValue * (i+1))), self.findValue((startPoint + sliceValue * i))]
+            axes[1,1].add_patch(Polygon(xy=list(zip(xCords, yCords)), ec='k', fc='none'))
+
         plt.show()
         
