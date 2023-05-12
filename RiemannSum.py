@@ -1,5 +1,6 @@
 import numpy as np
 import matplotlib.pyplot as plt
+import matplotlib.animation as animation
 from polynomialClass import Polynomial
 
 
@@ -16,6 +17,8 @@ def main():
     print("Midpoint Riemann Sum:",polynomialObject.midRiemannSum(startInterval,endInterval,sliceAmount))
     print("Trapezoidal Riemann Sum:",polynomialObject.trapRiemannSum(startInterval,endInterval,sliceAmount))
     polynomialObject.graphRiemann(startInterval, endInterval, sliceAmount)
+
+    
 
         
     
