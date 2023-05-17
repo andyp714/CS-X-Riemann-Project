@@ -17,7 +17,8 @@ def main():
     print("Midpoint Riemann Sum:",polynomialObject.midRiemannSum(startInterval,endInterval,sliceAmount))
     print("Trapezoidal Riemann Sum:",polynomialObject.trapRiemannSum(startInterval,endInterval,sliceAmount))
     polynomialObject.graphRiemann(startInterval, endInterval, sliceAmount)
-    polynomialObject.animRiemann(startInterval, endInterval, 1, 10)
+
+    polynomialObject.animRiemann(startInterval, endInterval, 1, 100)
 
     
 

@@ -110,21 +110,29 @@ class Polynomial():
         plt.show()
     
     def animRiemann(self, startPoint, endPoint, startsliceAmount, endsliceAmount):
-        fig, axes = plt.subplots(2,2)
+        fig = plt.figure()
         fig.tight_layout()
+        ax = fig.add_subplot(111)
         x = np.linspace(endPoint,startPoint, 100)
-        axes[0,0].plot(x, self.findValue(x), 'b-')
-        axes[0,1].plot(x, self.findValue(x), 'r-')
-        axes[1,0].plot(x, self.findValue(x), 'g-')
-        axes[1,1].plot(x, self.findValue(x), 'c-')
+        plt.plot(x, self.findValue(x), 'b-')
         currentsliceAmount = startsliceAmount
-        sliceValue = (endPoint - startPoint)/currentsliceAmount
 
         def func(i):
-            sliceValue = (endPoint - startPoint)/currentsliceAmount
-            currentsliceAmount += 1
-            axes[0,0].set_title(currentsliceAmount)
+            ax.clear()
+            sliceValue = (endPoint - startPoint)/(startsliceAmount+i)
+            plt.plot(x, self.findValue(x), 'b-')
+            plt.title(startsliceAmount+i)
+            #Left Riemann Sum Graph
+            tempList = []
+            for i in range(startsliceAmount+i):
+                plt.plot(startPoint + sliceValue * i, self.findValue(startPoint + sliceValue * i), 'bo')
+                ax.add_patch(Rectangle((startPoint + sliceValue * i,0), sliceValue, self.findValue(startPoint + sliceValue * i), fc=(0,0,1,0.2),ec=(0,0,1,0.5)))
 
-        ani = animation.FuncAnimation(fig, func, interval = 100, blit=True, frames=(endsliceAmount-startsliceAmount), repeat=True)
+            
+            
+            
+
+
+        ani = animation.FuncAnimation(fig, func, interval = 200, blit=False, frames=((endsliceAmount-startsliceAmount)+1), repeat=True)
         plt.show()
         
