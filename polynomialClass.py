@@ -108,4 +108,23 @@ class Polynomial():
             axes[1,1].add_patch(Polygon(xy=list(zip(xCords, yCords)), ec=(0,1,1,0.6), fc=(0,1,1,0.2)))
 
         plt.show()
+    
+    def animRiemann(self, startPoint, endPoint, startsliceAmount, endsliceAmount):
+        fig, axes = plt.subplots(2,2)
+        fig.tight_layout()
+        x = np.linspace(endPoint,startPoint, 100)
+        axes[0,0].plot(x, self.findValue(x), 'b-')
+        axes[0,1].plot(x, self.findValue(x), 'r-')
+        axes[1,0].plot(x, self.findValue(x), 'g-')
+        axes[1,1].plot(x, self.findValue(x), 'c-')
+        currentsliceAmount = startsliceAmount
+        sliceValue = (endPoint - startPoint)/currentsliceAmount
+
+        def func(i):
+            sliceValue = (endPoint - startPoint)/currentsliceAmount
+            currentsliceAmount += 1
+            axes[0,0].set_title(currentsliceAmount)
+
+        ani = animation.FuncAnimation(fig, func, interval = 100, blit=True, frames=(endsliceAmount-startsliceAmount), repeat=True)
+        plt.show()
         
