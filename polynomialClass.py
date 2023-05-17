@@ -121,7 +121,7 @@ class Polynomial():
             ax.clear()
             sliceValue = (endPoint - startPoint)/(startsliceAmount+i)
             plt.plot(x, self.findValue(x), 'b-')
-            plt.title(startsliceAmount+i)
+            plt.title('Number of subdivisions:' + str(startsliceAmount+i) + '  Left Riemann Sum:' + str(round(self.leftRiemannSum(startPoint, endPoint, startsliceAmount+i), 6)))
             #Left Riemann Sum Graph
             tempList = []
             for i in range(startsliceAmount+i):
@@ -133,6 +133,6 @@ class Polynomial():
             
 
 
-        ani = animation.FuncAnimation(fig, func, interval = 200, blit=False, frames=((endsliceAmount-startsliceAmount)+1), repeat=True)
+        ani = animation.FuncAnimation(fig, func, interval = 400, blit=False, frames=((endsliceAmount-startsliceAmount)+1), repeat=True)
         plt.show()
         
