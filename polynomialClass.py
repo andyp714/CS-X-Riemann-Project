@@ -2,6 +2,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 from matplotlib.patches import Rectangle
 from matplotlib.patches import Polygon
+import matplotlib.animation as animation
 
 
 class Polynomial():
